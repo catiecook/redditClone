@@ -11,7 +11,7 @@ app.controller("reddit", ($scope) => {
   $scope.allData = [
     {
       title: "First Post",
-      author: "Anna Frann",
+      author: "Francis O'Connally",
       description: "Damn that dog brown cats with pink ears but sleep on keyboard, for thug cat but lie on your belly and purr when you are asleep. Fall over dead (not really but gets sypathy). Put butt in owner's face favor packaging over toy lick arm hair. Hide from vacuum cleaner lick plastic bags but scratch leg; meow for can opener to feed me, but rub face on everything, for make muffins, but vommit food and eat it again, sleep on dog bed, force dog to sleep on floor. Have secret plans. Stares at human while pushing stuff off a table find empty spot in cupboard and sleep all day and catch mouse and gave it as a present.",
       image: "https://source.unsplash.com/category/food/200x300",
       rating: 0,
@@ -42,7 +42,12 @@ app.controller("reddit", ($scope) => {
       description: "Stares at human while pushing stuff off a table find empty spot in cupboard and sleep all day and catch mouse and gave it as a present. If it smells like fish eat as much as you wish sit on human, run in circles chirp at birds yet brown cats with pink ears, intently stare at the same spot. Rub face on owner swat at dog. Sit in box i cry and cry and cry unless you pet me, and then maybe i cry just for fun yet toy mouse squeak roll over but i like big cats and i can not lie. Chase the pig around the house chase mice, so meow to be let out. Sit in box scream at teh bath and scamper. Meowwww.",
       image: "https://source.unsplash.com/category/nature/200x300",
       rating: 0,
-      comments: [],
+      comments: [
+        {
+          author: 'James',
+          comment: 'Neature is more like it'
+        }
+      ],
       viewComments: false,
       commentsExist: false,
       addComment: false,
@@ -99,7 +104,7 @@ app.controller("reddit", ($scope) => {
   $scope.newPost = () => {
     $scope.master.newPost = true
   }
-//need to add in the author of the post
+
   $scope.addComment = (reddit, str, auth) => {
     var comment = {
       author: auth,
@@ -127,5 +132,4 @@ app.controller("reddit", ($scope) => {
     console.log(newPost)
     $scope.master.newPost = false
   }
-
 });
