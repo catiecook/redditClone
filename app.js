@@ -1,5 +1,4 @@
 var app = angular.module("redditClone", ['angularMoment'])
- console.log("in js file");
 app.controller("reddit", ($scope) => {
   $scope.master = {}
   $scope.master.commentsExist = false
