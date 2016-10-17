@@ -1,0 +1,162 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'ABeeZee', sans-serif;
+  font-size: .9em;
+  background-color: #ddd;
+}
+
+.container {
+  width: 100%;
+  margin-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-family: 'Bungee Inline';
+}
+
+table {
+  width: 95%;
+  margin: 2% auto;
+  padding: 2%;
+  background-color: white;
+}
+
+tr {
+  height: 180px;
+}
+
+textarea {
+  margin: 2%;
+}
+
+input.new {
+  margin-right: 3%;
+  padding: 1%;
+}
+
+.title {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-right: 1%;
+}
+
+.titleRating {
+  width: 50%;
+}
+
+.addOns {
+  margin-right: 4%;
+}
+
+.author {
+  font-size: .8em;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.floatedimg {
+  width: 25%;
+  margin-right: 5%;
+  position: relative;
+  float: left;
+  clear: none;
+}
+
+.floated {
+  width: 65%;
+  position: relative;
+  float: left;
+  clear: none;
+  overflow: scroll;
+}
+
+.posRating {
+  color: darkgreen;
+}
+
+.negRating {
+  color: indianred;
+}
+
+.zeroRating {
+  color: black;
+}
+
+.spread {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.spreadNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.search {
+  padding: 1%;
+}
+
+.redditImg {
+  width: 100%;
+  min-width: 50px;
+}
+
+.description {
+  margin-top: 3%;
+}
+
+.addComment {
+  position: relative;
+  float: right;
+  width: 30%;
+}
+
+.comments {
+  width: 70%;
+  height: auto;
+}
+
+.newPost {
+  background-color: white;
+  width: 91%;
+  height: auto;
+  padding: 5% 2%;
+}
+
+.newPostBox {
+  width: 85%;
+  height: auto;
+  padding: 2%;
+}
+
+.right {
+  position: relative;
+  float: right;
+  clear: both;
+  margin-right: 10%;
+}
+
+.bad {
+  background-color: rgba(231, 177, 177, .2);
+
+}
+
+.good {
+  background-color: rgba(177, 231, 204, .2);
+
+}

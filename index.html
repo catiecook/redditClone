@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html ng-app="redditClone">
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit Clone</title>
+
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=ABeeZee|Kaushan+Script" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
+
+    <!-- font awesome -->
+
+    <script src="https://use.fontawesome.com/7d1aa357f7.js"></script>
+
+    <!-- my stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+
+
+  </head>
+  <body ng-controller="reddit">
+    <h1>
+      Reddit Clone
+    </h1>
+    <br>
+    <span class="spreadNav">
+      <detail ng-model="new" ng-click="newPost()">
+        <i class="fa fa-plus" aria-hidden="true"></i>Submit Post
+      </detail>
+      <input
+        class="search"
+        name="search"
+        ng-model="redditSearch"
+        placeholder="Search"
+      >
+      <detail
+        name="sort"
+        ng-model="redditSort"
+      >
+         Sort by {{ngSort}}<i class="fa fa-sort" aria-hidden="true"></i>
+         <select
+          name="sort"
+          ng-model="ngSort"
+          ng-init="-rating">
+           <option
+            value="title"
+            ng-model="sortTitle">Title
+          </option>
+          <option
+           value="author"
+           ng-model="sortAuthor">Author
+         </option>
+         <option
+          value="-rating"
+          ng-model="sortRating">Rating
+        </option>
+         </select>
+      </detail>
+    </span>
+
+    <br>
+
+    <div class="newPost" ng-show="master.newPost">
+      <form ng-model="newPostForm" name="postNew">
+        <span>
+          <label for="newTitle">
+            Title:
+          </label>
+          <input type="text"
+            class="new"
+            name="newTitle"
+            ng-model="redditTitle"
+            placeholder="Title"
+            required
+            />
+        </span>
+        <span>
+          <label for="newBody">
+            Image:
+          </label>
+          <input type="url"
+            class="new"
+            name="newImage"
+            ng-model="redditImage"
+            required
+          />
+        </span>
+        <span>
+          <label for="newAuthor">
+            Author:
+          </label>
+          <input type="text"
+            class="new"
+            name="newAuthor"
+            ng-model="redditAuthor"
+            required
+          />
+        </span>
+        <br><br>
+        <span>
+          <label for="newBody">
+            Post:
+          </label>
+          <br>
+          <textarea type="text"
+            class="newPostBox"
+            name="newBody"
+            ng-model="redditBody"
+            placeholder="Full Post Here"
+            required
+          >
+          </textarea>
+        </span>
+        <br>
+
+        <button
+          type="submit"
+          class="right"
+          ng-click="addPost(redditTitle, redditAuthor, redditBody, redditImage)"
+        >
+            Submit!
+        </button>
+      </form>
+    </div>
+
+    <div class="container">
+      <!-- {{allData}} -->
+
+      <table ng-repeat="(index, reddit) in allData | filter: redditSearch | orderBy: ngSort: reverse"
+        ng-model="redditPost"
+      >
+
+        <tr>
+          <td class='floatedimg'>
+              <img class="redditImg" ng-src="{{reddit.image}}" />
+          </td>
+          <td class='floated'>
+            <span class="spread">
+              <span class="titleRating">
+              <detail class="title">
+                {{reddit.title}}
+              </detail>
+
+              <i class="fa fa-arrow-up"
+                aria-hidden="true"
+                ng-click="rateUp(reddit)"
+                ng-model="votesUp"
+              >
+            </i>
+              <i class="fa fa-arrow-down"
+                aria-hidden="true"
+                ng-click="rateDown(reddit)"
+                ng-model="votesDown"
+              >
+              </i>
+              <small ng-class="{'posRating': reddit.rating > 1, zeroRating: reddit.rating === 0, negRating: reddit.rating < 1}"
+                name="rating"
+                ng-model="rate"
+              >
+                {{reddit.rating}}
+              </small>
+              </span>
+              <span class="author">
+                Posted by: {{reddit.author}}
+              </span>
+            </span>
+            <br>
+            <hr>
+            <div class="description">
+              {{reddit.description}}
+            </div>
+            <br>
+            <hr>
+            <br>
+            <span class="spread">
+                <small class="addOns">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                  <time am-time-ago="time">{{reddit.time | amCalendar}}</time>
+                </small>
+                <small class="addOns" ng-click="viewComments(reddit)">
+                <i class="fa fa-comment"  aria-hidden="true"></i>
+                 Comments ({{reddit.comments.length}})
+              </small class="addOns">
+                <small ng-click="newComment(reddit)" >
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                Add Comment
+              </small>
+            </span>
+          </td>
+          </tr>
+
+          <tr class="comments">
+            <td class="spread">
+              <div ng-show="reddit.viewComments">
+              <p> Comments: </p>
+                <p ng-repeat="(author, comment) in reddit.comments"> {{comment.comment}} <br> <small class="author"> By: {{comment.author}}</small> </p>
+            </div>
+              <small class="comments"
+                ng-show="reddit.commentsExist"
+                ng-model="commentsExist"
+              >
+              {{reddit.comment}}
+
+              </small>
+            </td>
+          </tr>
+            <tr class="comments">
+              <td>
+                <section class="addComment" ng-show="reddit.addComment">
+                  <h3>
+                    Add a Comment
+                  </h3>
+
+                  <label>
+                    Author:
+                  </label>
+                  <input type="text"
+                    ng-model="commentAuthor"
+                  >
+                  <br><br>
+                  <label>
+                    Comment:
+                  </label>
+                  <input type="text"
+                    ng-model="commentToAdd"
+                  >
+
+                  <br><br>
+                  <button type="submit"
+                    ng-click="addComment(reddit, commentToAdd, commentAuthor)">
+                    Submit
+                  </button>
+                </section>
+              </td>
+            </tr>
+      </table>
+    </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+
+      <!-- load momentJS (required for angular-moment) -->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+      <!-- load angular-moment -->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+
+
+
+
+      <script src="app.js" type="text/javascript"></script>
+
+
+  </body>
+</html>
