@@ -92,6 +92,14 @@
             placeholder="Title"
             required
           />
+          <div class="error" ng-show="postNew.title.$invalid">
+            <small class="error" ng-show='postNew.title.$error.required'>
+              Title is required.
+            </small>
+            <small class="error" ng-show='postNew.title.$error.minlength'>
+              Title needs to be at least 3 characters.
+            </small>
+          </div>
         </span>
         <span>
           <label for="newBody">
@@ -136,7 +144,7 @@
         <button
           type="submit"
           class="right"
-          ng-click="addPost(redditTitle, redditAuthor, redditBody, redditImage)"
+          ng-click="addPost(newPostForm)"
         >
           Submit!
         </button>
@@ -144,7 +152,8 @@
     </div>
     <div class="container">
       <table
-        ng-repeat="(index, reddit) in allData | filter: redditSearch | orderBy: ngSort: reverse"
+        ng-repeat="(index, reddit) in allData
+        | filter: redditSearch | orderBy: ngSort: reverse"
         ng-model="redditPost"
       >
         <tr>

@@ -114,12 +114,12 @@ app.controller("reddit", ($scope) => {
     reddit.addComment = false
   }
 
-  $scope.addPost = (postTitle, auth, post, imageURL) =>{
+  $scope.addPost = (post) =>{
     var newPost = {
-      title: postTitle,
-      author: auth,
-      description: post,
-      image: imageURL,
+      title: $scope.redditTitle,
+      author: $scope.redditAuthor,
+      description: $scope.redditBody,
+      image: $scope.redditImage,
       rating: 0,
       comments: [],
       viewComments: false,
@@ -129,6 +129,7 @@ app.controller("reddit", ($scope) => {
     }
     $scope.allData.push(newPost)
     console.log(newPost)
+    console.log($scope.postNew.redditTitle);
     $scope.master.newPost = false
   }
 });
